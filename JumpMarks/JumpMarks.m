@@ -67,35 +67,36 @@ static JumpMarks *sharedPlugin;
         
         // General shortcuts
         NSMenuItem *clearMarks = [submenu addItemWithTitle:@"Clear all Marks" action:@selector(clearMarks:) keyEquivalent:@"C"];
-		[clearMarks setKeyEquivalentModifierMask:NSAlternateKeyMask];
+        [clearMarks setKeyEquivalentModifierMask:NSAlternateKeyMask];
         clearMarks.target = self;
         
         NSMenuItem *prevMark = [submenu addItemWithTitle:@"Jump To Prev Mark" action:@selector(jumpToPrevMark:) keyEquivalent:@"["];
-        [prevMark setKeyEquivalentModifierMask:NSAlternateKeyMask];
+        [prevMark setKeyEquivalentModifierMask:NSCommandKeyMask | NSAlternateKeyMask | NSShiftKeyMask];
         prevMark.target = self;
         
         NSMenuItem *nextMark = [submenu addItemWithTitle:@"Jump To Next Mark" action:@selector(jumpToNextMark:) keyEquivalent:@"]"];
-        [nextMark setKeyEquivalentModifierMask:NSAlternateKeyMask];
+        [nextMark setKeyEquivalentModifierMask:NSCommandKeyMask | NSAlternateKeyMask | NSShiftKeyMask];
         nextMark.target = self;
         
         [submenu addItem:[NSMenuItem separatorItem]];
-
+        
         // Toggle mark shortcuts
         for(int i=0; i<NUM_MARKS; i++) {
             NSMenuItem *toggleMark = [submenu addItemWithTitle:[NSString stringWithFormat:@"Toggle #%d", i]
                                                         action:@selector(toggleMark:) keyEquivalent:[NSString stringWithFormat:@"%d", i]];
             [toggleMark setKeyEquivalentModifierMask:NSAlternateKeyMask | NSShiftKeyMask];
+            
             [toggleMark setRepresentedObject:@(i)];
             toggleMark.target = self;
         }
-
+        
         [submenu addItem:[NSMenuItem separatorItem]];
-
+        
         // Jump to mark shortcuts
         for(int i=0; i<NUM_MARKS; i++) {
             NSMenuItem *jumpToMark = [submenu addItemWithTitle:[NSString stringWithFormat:@"Jump To #%d", i]
                                                         action:@selector(jumpToMark:) keyEquivalent:[NSString stringWithFormat:@"%d", i]];
-            [jumpToMark setKeyEquivalentModifierMask: NSAlternateKeyMask];
+            [jumpToMark setKeyEquivalentModifierMask: NSCommandKeyMask | NSAlternateKeyMask | NSShiftKeyMask];
             [jumpToMark setRepresentedObject:@(i)];
             jumpToMark.target = self;
         }
